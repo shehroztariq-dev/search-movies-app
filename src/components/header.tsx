@@ -1,15 +1,22 @@
 // components/header.tsx
 
-const Header = () => {
+import Search from "./search";
+
+const Header = ({ searchTerm, setSearchTerm }: HeaderProps) => {
   return (
-    <header className="w-full px-6 py-2 bg-white shadow-sm fixed ">
-      <div className="flex items-center gap-2 max-w-7xl mx-auto">
-        <img src="/logo.png" alt="Logo" className="h-14 w-14" />
-        <span>
-          <h1 className="font-bold text-gray-700 font-stretch-extra-expanded text-4xl">
-            CineSeek
-          </h1>
-        </span>
+    <header className="flex items-center justify-around w-full  py-2 bg-white shadow-md fixed top-0 z-50">
+      <div className="flex items-center gap-3">
+        <img
+          src="/logo.png"
+          alt="CineSeek Logo"
+          className="h-12 w-12 object-contain"
+        />
+        <h1 className="font-bold text-gray-800 text-3xl tracking-tight">
+          CineSeek
+        </h1>
+      </div>
+      <div className="flex-1 max-w-md ">
+        <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       </div>
     </header>
   );

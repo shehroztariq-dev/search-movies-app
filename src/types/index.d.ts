@@ -1,4 +1,4 @@
-declare interface HeroProps {
+declare interface HeaderProps {
   searchTerm: string;
   setSearchTerm: (term: string) => void;
 }
