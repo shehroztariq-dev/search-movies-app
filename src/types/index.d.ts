@@ -16,3 +16,16 @@ declare interface AllMoviesProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   moviesList: any[];
 }
+
+declare interface MovieCardProps {
+  movie: {
+    id: number;
+    title: string;
+    category?: string;
+    poster_path?: string;
+    release_date?: string;
+    vote_average?: number;
+    original_language?: string;
+    release_date?: Date;
+  };
+}

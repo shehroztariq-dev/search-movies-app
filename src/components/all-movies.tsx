@@ -1,5 +1,7 @@
 // components/AllMovies.tsx
 
+import MovieCard from "./movie-card";
+
 const AllMovies = ({ errorMessage, isLoading, moviesList }: AllMoviesProps) => {
   if (isLoading) {
     return (
@@ -32,9 +34,7 @@ const AllMovies = ({ errorMessage, isLoading, moviesList }: AllMoviesProps) => {
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {moviesList.map((movie) => (
-            <div key={movie.id} className="bg-white rounded-lg shadow p-4">
-              <h3 className="font-medium">{movie.title}</h3>
-            </div>
+            <MovieCard key={movie.id} movie={movie} />
           ))}
         </div>
       )}
