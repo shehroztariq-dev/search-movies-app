@@ -29,3 +29,7 @@ declare interface MovieCardProps {
     release_date?: Date;
   };
 }
+
+interface HeroProps {
+  bannerUrl: string | null;
+}

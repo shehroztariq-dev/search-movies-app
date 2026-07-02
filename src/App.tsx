@@ -1,5 +1,5 @@
+// App.tsx
 import { useEffect, useState } from "react";
-import Search from "./components/search";
 import Header from "./components/header";
 import AllMovies from "./components/all-movies";
 import Hero from "./components/hero";
@@ -21,6 +21,7 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [moviesList, setMoviesList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [bannerUrl, setBannerUrl] = useState<string | null>(null);
 
   const fetchMovies = async (query: string = "") => {
     setIsLoading(true);
@@ -36,7 +37,6 @@ const App = () => {
         throw new Error("Failed to fetch movies");
       }
       const data = await response.json();
-      console.log(data);
 
       if (data.response === "False") {
         setErrorMessage(data.Error || "Failed to fetch movies");
@@ -52,14 +52,50 @@ const App = () => {
       setIsLoading(false);
     }
   };
+
+  const fetchBanner = async () => {
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}/trending/movie/day`,
+        API_OPTIONS,
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch trending movies");
+      }
+
+      const data = await response.json();
+      const withBackdrop = (data.results || []).filter(
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (m: any) => m.backdrop_path,
+      );
+
+      if (withBackdrop.length > 0) {
+        const random =
+          withBackdrop[Math.floor(Math.random() * withBackdrop.length)];
+        setBannerUrl(
+          `https://image.tmdb.org/t/p/original${random.backdrop_path}`,
+        );
+      }
+    } catch (error) {
+      console.log(`Error fetching banner: ${error}`);
+    }
+  };
+
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchMovies(searchTerm);
   }, [searchTerm]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchBanner();
+  }, []);
 
   return (
     <main>
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <Hero />
+      <Hero bannerUrl={bannerUrl} />
       <AllMovies
         errorMessage={errorMessage}
         isLoading={isLoading}

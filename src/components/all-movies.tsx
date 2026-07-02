@@ -5,7 +5,7 @@ import MovieCard from "./movie-card";
 const AllMovies = ({ errorMessage, isLoading, moviesList }: AllMoviesProps) => {
   if (isLoading) {
     return (
-      <section className="px-6 py-8 container">
+      <section className=" py-8 container">
         <h2 className="text-2xl font-bold mb-6">All Movies</h2>
         <div className="text-center py-12">
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-gray-300 border-t-blue-600"></div>
@@ -17,7 +17,7 @@ const AllMovies = ({ errorMessage, isLoading, moviesList }: AllMoviesProps) => {
 
   if (errorMessage) {
     return (
-      <section className="px-6 py-8 container">
+      <section className=" py-8 container">
         <h2 className="text-2xl font-bold mb-6">All Movies</h2>
         <div className="bg-red-50 border border-red-200 rounded-lg p-6">
           <p className="text-red-600">{errorMessage}</p>
@@ -27,7 +27,7 @@ const AllMovies = ({ errorMessage, isLoading, moviesList }: AllMoviesProps) => {
   }
 
   return (
-    <section className="px-6 py-8 container">
+    <section className=" py-8 container">
       <h2 className="text-2xl font-bold mb-6">Popular</h2>
       {moviesList.length === 0 ? (
         <p className="text-gray-500">No movies available</p>
