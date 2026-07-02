@@ -1,5 +1,6 @@
 // App.tsx
 import { useEffect, useState } from "react";
+import { useDebounce } from "react-use";
 import Header from "./components/header";
 import AllMovies from "./components/all-movies";
 import Hero from "./components/hero";
@@ -22,6 +23,11 @@ const App = () => {
   const [moviesList, setMoviesList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [bannerUrl, setBannerUrl] = useState<string | null>(null);
+  const [debounceSearchTerm, setDebounceSearchTerm] = useState("");
+
+  // Debounce the search term to prevent making too many API requests
+  // by waiting for the user to stop typing for 500ms
+  useDebounce(() => setDebounceSearchTerm(searchTerm), 500, [searchTerm]);
 
   const fetchMovies = async (query: string = "") => {
     setIsLoading(true);
@@ -84,8 +90,8 @@ const App = () => {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    fetchMovies(searchTerm);
-  }, [searchTerm]);
+    fetchMovies(debounceSearchTerm);
+  }, [debounceSearchTerm]);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
