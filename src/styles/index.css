@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-sm {
+    @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-fluid {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
