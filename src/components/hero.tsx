@@ -14,7 +14,7 @@ const Hero = ({ bannerUrl }: HeroProps) => {
         />
         {/* Fallback gradient while loading / if fetch fails */}
         <div
-          className={`absolute inset-0 bg-gradient-to-b from-cyan-50/60 via-white to-white transition-opacity duration-700 ${
+          className={`absolute inset-0 bg-linear-to-b from-cyan-50/60 via-white to-white transition-opacity duration-700 ${
             bannerUrl ? "opacity-0" : "opacity-100"
           }`}
         />
