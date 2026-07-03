@@ -15,7 +15,7 @@ interface SearchProps {
 const Search = ({
   searchTerm,
   setSearchTerm,
-  placeholder = "Search through thousands of movies",
+  placeholder = "Search through thousands of books",
   className = "",
   onSearch,
   autoFocus = false,
@@ -44,7 +44,7 @@ const Search = ({
 
   return (
     <div
-      className={`px-4 py-2.5 rounded-full bg-gray-100 hover:bg-gray-200 focus-within:bg-white focus-within:ring-2   transition-all duration-200 w-full max-w-md ${className}`}
+      className={`px-4 py-2.5 rounded-full bg-gray-100 hover:bg-gray-200 focus-within:bg-white focus-within:ring-2 transition-all duration-200 max-w-full ${className}`}
       role="search">
       <div className="flex items-center gap-3 min-w-0">
         <SearchIcon

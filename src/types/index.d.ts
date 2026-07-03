@@ -30,10 +30,6 @@ declare interface MovieCardProps {
   };
 }
 
-declare interface HeroProps {
-  bannerUrl: string | null;
-}
-
 declare interface Movie {
   id: number;
   title: string;

@@ -24,7 +24,6 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [moviesList, setMoviesList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [bannerUrl, setBannerUrl] = useState<string | null>(null);
   const [debounceSearchTerm, setDebounceSearchTerm] = useState("");
   const [topMovies, setTopMovies] = useState([]);
 
@@ -56,42 +55,16 @@ const App = () => {
       setMoviesList(data.results || []);
 
       if (query && data.results.length > 0) {
-        await updateSearchCount({ searchTerm: query, movie: data.results[0] });
+        await updateSearchCount({
+          searchTerm: query.toLowerCase(),
+          movie: data.results[0],
+        });
       }
     } catch (error) {
       console.log(`"Error fetch movies: ${error}`);
       setErrorMessage("Error fetching movies. Please try again later.");
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const fetchBanner = async () => {
-    try {
-      const response = await fetch(
-        `${API_BASE_URL}/trending/movie/day`,
-        API_OPTIONS,
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch trending movies");
-      }
-
-      const data = await response.json();
-      const withBackdrop = (data.results || []).filter(
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (m: any) => m.backdrop_path,
-      );
-
-      if (withBackdrop.length > 0) {
-        const random =
-          withBackdrop[Math.floor(Math.random() * withBackdrop.length)];
-        setBannerUrl(
-          `https://image.tmdb.org/t/p/original${random.backdrop_path}`,
-        );
-      }
-    } catch (error) {
-      console.log(`Error fetching banner: ${error}`);
     }
   };
 
@@ -111,18 +84,13 @@ const App = () => {
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    fetchBanner();
-  }, []);
-
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchTopMovies();
   }, []);
 
   return (
     <main>
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <Hero bannerUrl={bannerUrl} />
+      <Hero />
       <TrendingMovies topMovies={topMovies} />
       <AllMovies
         errorMessage={errorMessage}
