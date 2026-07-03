@@ -4,6 +4,7 @@ import { useDebounce } from "react-use";
 import Header from "./components/header";
 import AllMovies from "./components/all-movies";
 import Hero from "./components/hero";
+import { updateSearchCount } from "./services/metrices";
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 
@@ -51,6 +52,10 @@ const App = () => {
       }
 
       setMoviesList(data.results || []);
+
+      if (query && data.results.length > 0) {
+        await updateSearchCount({ searchTerm: query, movie: data.results[0] });
+      }
     } catch (error) {
       console.log(`"Error fetch movies: ${error}`);
       setErrorMessage("Error fetching movies. Please try again later.");

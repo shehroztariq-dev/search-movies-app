@@ -30,6 +30,16 @@ declare interface MovieCardProps {
   };
 }
 
-interface HeroProps {
+declare interface HeroProps {
   bannerUrl: string | null;
+}
+
+interface Movie {
+  id: number;
+  title: string;
+  poster_path: string | null;
+}
+declare interface UpdateSearchCountProps {
+  searchTerm: string;
+  movie: Movie;
 }
