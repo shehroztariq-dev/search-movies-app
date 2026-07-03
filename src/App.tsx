@@ -4,7 +4,8 @@ import { useDebounce } from "react-use";
 import Header from "./components/header";
 import AllMovies from "./components/all-movies";
 import Hero from "./components/hero";
-import { updateSearchCount } from "./services/metrices";
+import { getTopMovies, updateSearchCount } from "./services/metrices";
+import TrendingMovies from "./components/trending-movies";
 
 const API_BASE_URL = "https://api.themoviedb.org/3";
 
@@ -25,6 +26,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [bannerUrl, setBannerUrl] = useState<string | null>(null);
   const [debounceSearchTerm, setDebounceSearchTerm] = useState("");
+  const [topMovies, setTopMovies] = useState([]);
 
   // Debounce the search term to prevent making too many API requests
   // by waiting for the user to stop typing for 500ms
@@ -93,6 +95,15 @@ const App = () => {
     }
   };
 
+  const fetchTopMovies = async () => {
+    try {
+      const movies = await getTopMovies();
+      setTopMovies(movies);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchMovies(debounceSearchTerm);
@@ -103,10 +114,16 @@ const App = () => {
     fetchBanner();
   }, []);
 
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchTopMovies();
+  }, []);
+
   return (
     <main>
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <Hero bannerUrl={bannerUrl} />
+      <TrendingMovies topMovies={topMovies} />
       <AllMovies
         errorMessage={errorMessage}
         isLoading={isLoading}

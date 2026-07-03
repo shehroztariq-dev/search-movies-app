@@ -34,7 +34,7 @@ declare interface HeroProps {
   bannerUrl: string | null;
 }
 
-interface Movie {
+declare interface Movie {
   id: number;
   title: string;
   poster_path: string | null;

@@ -48,3 +48,23 @@ export const updateSearchCount = async ({
     console.log("Error:", error);
   }
 };
+
+export const getTopMovies = async () => {
+  try {
+    const { data, error } = await supabase
+      .from("metrices")
+      .select("*")
+      .order("count", { ascending: false })
+      .limit(5);
+
+    if (error) {
+      console.log("Error fetching top movies:", error.message);
+      return [];
+    }
+
+    return data ?? [];
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
