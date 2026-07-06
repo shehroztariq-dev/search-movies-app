@@ -61,7 +61,7 @@ const Search = ({
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={handleKeyDown}
-          aria-label="Search movies"
+          aria-label="Search books"
           aria-describedby="search-instructions"
           spellCheck={false}
         />

@@ -39,3 +39,37 @@ declare interface UpdateSearchCountProps {
   searchTerm: string;
   movie: Movie;
 }
+
+interface Book {
+  id: string;
+  volumeInfo: {
+    title: string;
+    authors?: string[];
+    publishedDate?: string;
+    averageRating?: number;
+    language?: string;
+    imageLinks?: {
+      smallThumbnail?: string;
+      thumbnail?: string;
+      small?: string;
+      medium?: string;
+      large?: string;
+      extraLarge?: string;
+    };
+  };
+}
+
+interface BookCardProps {
+  book: Book;
+}
+
+interface AllBooksProps {
+  errorMessage: string;
+  isLoading: boolean;
+  booksList: Book[];
+}
+
+interface HeaderProps {
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
+}
