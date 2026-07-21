@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Hero from "../components/Hero";
 import AllBooks from "../components/AllBooks";
 import { fetchAllBooks } from "../services/books";
+import Hero from "../components/Hero";
 
 const PAGE_SIZE = 20;
 
