@@ -64,9 +64,9 @@ interface BookCardProps {
 }
 
 interface AllBooksProps {
-  errorMessage: string;
+  errorMessage?: string | null;
   isLoading: boolean;
-  booksList: Book[];
+  books: Book[];
 }
 
 interface HeaderProps {

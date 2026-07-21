@@ -1,15 +1,18 @@
-// components/all-books.tsx
+import BookCard from "./BookCard";
 
-import BookCard from "./book-card";
-
-const AllBooks = ({ errorMessage, isLoading, booksList }: AllBooksProps) => {
+const AllBooks = ({ errorMessage, isLoading, books }: AllBooksProps) => {
   if (isLoading) {
     return (
       <section className=" py-8 container">
         <h2 className="text-2xl font-bold mb-6">All Books</h2>
-        <div className="text-center py-12">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-4 border-gray-300 border-t-blue-600"></div>
-          <p className="mt-4 text-gray-500">Loading books...</p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={i} className="animate-pulse">
+              <div className="bg-gray-200 rounded-lg aspect-[2/3] w-full mb-3"></div>
+              <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+              <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+            </div>
+          ))}
         </div>
       </section>
     );
@@ -28,12 +31,12 @@ const AllBooks = ({ errorMessage, isLoading, booksList }: AllBooksProps) => {
 
   return (
     <section className=" py-8 container">
-      <h2 className="text-2xl font-bold mb-6">Popular</h2>
-      {booksList.length === 0 ? (
+      <h2 className="text-2xl font-bold mb-6">All Books</h2>
+      {books.length === 0 ? (
         <p className="text-gray-500">No books available</p>
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {booksList.map((book) => (
+          {books.map((book) => (
             <BookCard key={book.id} book={book} />
           ))}
         </div>

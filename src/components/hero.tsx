@@ -2,7 +2,7 @@
 
 const Hero = () => {
   return (
-    <div className="container mx-auto px-4 mt-34 md:mt-24">
+    <div className="container mx-auto px-4  ">
       <div className="relative flex h-64 sm:h-80 md:h-96 flex-col items-center justify-center overflow-hidden rounded-2xl border border-gray-100 shadow-sm">
         {/* Background banner */}
         <div
